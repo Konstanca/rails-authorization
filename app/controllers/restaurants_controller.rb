@@ -22,6 +22,9 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   def create
     @restaurant = Restaurant.new(restaurant_params)
+    # au moment de la création on dit que l'utilisateur est celui qui est connecté
+    # du coup on enlève user_id des restaurant_params
+    @restaurant.user = current_user
 
     if @restaurant.save
       redirect_to @restaurant, notice: "Restaurant was successfully created."
@@ -53,6 +56,6 @@ class RestaurantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def restaurant_params
-      params.require(:restaurant).permit(:name, :user_id)
+      params.require(:restaurant).permit(:name)
     end
 end
