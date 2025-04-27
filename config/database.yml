@@ -79,6 +79,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: rails_authorization_production
   username: rails_authorization
   password: <%= ENV["RAILS_AUTHORIZATION_DATABASE_PASSWORD"] %>
